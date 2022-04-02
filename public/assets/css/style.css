@@ -43,9 +43,7 @@ header {
   text-align: center;
 }
 
-section.container,
-section.backgroundContainer,
-section.backgroundContainer2 {
+section.container {
   align-self: baseline;
   justify-content: center;
   flex-wrap: wrap;
