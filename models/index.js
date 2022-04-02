@@ -1,8 +1,8 @@
 const User = require("./User");
 const Wallet = require("./Wallet");
-const Coin = require("./Coin")
+const Coin = require("./Coin");
 
-User.hasone(Wallet);
+// User.hasone(Wallet);
 
 Wallet.belongsTo(User);
 
