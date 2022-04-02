@@ -1,9 +1,11 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Wallet = require('./Wallet');
+const Coin = require('./Coin');
 
-class Wallet extends Model { }
+class Coins_Wallet extends Model { }
 
-Wallet.init(
+Coins_Wallet.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,24 +13,30 @@ Wallet.init(
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        user_id: {
+        WalletId: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: Wallet,
                 key: 'id'
             }
+        },
+        CoinId: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: Coin,
+                key: 'id'
+            }
+        },
+        count: {
+            type: DataTypes.INTEGER
         }
     },
     {
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'wallet'
+        modelName: 'coin_wallet'
     }
 );
 
-module.exports = Wallet;
+module.exports = Coins_Wallet;
