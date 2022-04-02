@@ -18,7 +18,7 @@ https://goingblindbro.github.io/crypto-source-pro/
 
 ## Screenshot
 
-![ScreenShot](https://github.com/goingblindbro/CryptoSource/blob/1fa44f30c99f9c07dbea791e67d18d196da500cb/Screen%20Shot%202022-02-10%20at%206.51.43%20PM.png)
+![ScreenShot](website-screenshot.png)
 
 ## Contributors
 
