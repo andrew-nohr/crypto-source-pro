@@ -33,6 +33,7 @@ Coins_Wallet.init(
     },
     {
         sequelize,
+        timestamps: false,
         freezeTableName: true,
         underscored: true,
         modelName: 'coin_wallet'
