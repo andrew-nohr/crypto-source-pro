@@ -14,9 +14,17 @@ Wallet.belongsTo(User, {
 });
 
 // connects wallet and coins through join table
-Wallet.belongsToMany(Coin, { through: Coins_Wallet });
+Wallet.belongsToMany(Coin, { 
+    through: Coins_Wallet,
+    as: 'wallet',
+    foreignKey: 'WalletID'
+});
 
 // connects wallet and coins through join table
-Coin.belongsToMany(Wallet, { through: Coins_Wallet });
+Coin.belongsToMany(Wallet, { 
+  through: Coins_Wallet,
+  as: 'owned_coins',
+  foreignKey: 'CoinID'
+});
 
 module.exports = { User, Wallet, Coin, Coins_Wallet };

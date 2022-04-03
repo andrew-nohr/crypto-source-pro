@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-class Wallet extends Model {}
+class Wallet extends Model { }
 
 Wallet.init(
   {

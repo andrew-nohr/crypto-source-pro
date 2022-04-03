@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Wallet, User } = require('../../models');
+const { Wallet, User, Coin } = require('../../models');
 
 // route: /api/wallet
 router.get('/', (req, res) => {
@@ -26,7 +26,19 @@ router.get('/:id', (req, res) => {
             id: req.params.id
         },
         attributes: [
+            'id',
             'name'
+        ],
+        include: [
+            {
+                model: Coin,
+                as: "owned_coins",
+                attributes: ['id', 'acronym', 'name'],
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
         ]
     })
     .then(dbWalletData => {
@@ -55,7 +67,5 @@ router.post('/', (req, res) => {
         res.status(500).json(err);
     });
 });
-
-
 
 module.exports = router;
