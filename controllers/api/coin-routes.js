@@ -38,18 +38,4 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// route: /api/coins/
-router.post('/', (req, res) => {
-    // expects {acronym: 'BTC', 'name: Bitcoin}
-    Coin.create({
-      acronym: req.body.acronym,
-      name: req.body.name
-    })
-    .then(dbCoinData => res.json(dbCoinData))
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-});
-
 module.exports = router;
