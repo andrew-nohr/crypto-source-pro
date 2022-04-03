@@ -19,13 +19,6 @@ Coin.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        wallet_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'wallet',
-                key: 'id'
-            }
-        }
     },
     {
         sequelize,
