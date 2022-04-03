@@ -36,7 +36,7 @@ Coins_Wallet.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'coin_wallet'
+        modelName: 'coins_wallet'
     }
 );
 
