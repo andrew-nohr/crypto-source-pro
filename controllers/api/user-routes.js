@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
-// GET /api/users
+// GET /api/user
 router.get('/', (req, res) => {
     User.findAll({
         attributes: { exclude: ['password'] }
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         });
 });
 
-// POST /api/users
+// POST /api/user
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
         });
 });
 
-// GET /api/users/1
+// GET /api/user/1
 router.get('/:id', (req, res) => {
     User.findOne({
         attributes: { exclude: ['password'] },
@@ -47,7 +47,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-// POST /api/users/login
+// POST /api/user/login
 router.post('/login', (req, res) => {
     User.findOne({
         where: {
@@ -55,7 +55,7 @@ router.post('/login', (req, res) => {
         }
     }).then(dbUserData => {
         if (!dbUserData) {
-            res.status(400).json({ message: 'No user with that email address!' });
+            res.status(400).json({ message: 'No user with that username!' });
             return;
         }
 
@@ -70,7 +70,7 @@ router.post('/login', (req, res) => {
     });
 });
 
-// DELETE /api/users/1
+// DELETE /api/user/1
 router.delete('/:id', (req, res) => {
     User.destroy({
         where: {
