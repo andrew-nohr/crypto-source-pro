@@ -10,7 +10,9 @@ Given that cryptocurrencies are extremely volatile, prior to making an impulse b
 
 ## TECHNOLOGY USED
 
-HTML, CSS, Bulma, Javascript
+HTML, CSS, Bulma, Javascript, Sequelize, Sequelize CLI
+
+To seed the coin table, first install the sequelize CLI by running the command 'npm install --save-dev sequelize-cli' from your terminal. Next, type 'npx sequelize db:seed --seed 20220403004935-coin-seeder.js' to seed the table. If you accidentally run the seeder more than once simply type the command 'npx sequelize db:seed:undo:all' to undo your changes. 
 
 ## Link:
 
