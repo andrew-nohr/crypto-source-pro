@@ -36,7 +36,6 @@ header {
   justify-content: center;
 }
 
-.has-text-warning,
 .cryptoName,
 .cryptoValue,
 .time-date {
@@ -51,3 +50,7 @@ section.container {
   flex-direction: row;
 }
 
+.navbar,
+.button {
+  display: flex;
+}
