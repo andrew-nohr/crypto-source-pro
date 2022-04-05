@@ -1,20 +1,21 @@
 const router = require("express").Router();
-const { Wallet, Coin } = require("../models");
+const { Wallet, Coin, User } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
     const walletData = await Wallet.findAll({
+      attributes: ['id', 'name'],
       include: [
         {
-          model: Coin,
-          attributes: ["filename", "description"],
-        },
-      ],
-    });
+          model: User,
+          attributes: ['username']
+        }
+      ]
+    })
 
     const wallets = walletData.map((wallet) => wallet.get({ plain: true }));
     console.log(wallets);
-    res.render("homepage", {
+    res.render("wallet", {
       wallets,
     });
   } catch (err) {
