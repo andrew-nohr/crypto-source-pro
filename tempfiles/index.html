@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <title>Crypto Source Pro</title>
 </head>
@@ -102,68 +102,39 @@
       </section>
 
       <section class="backgroundContainer2 is-gapless">
-        <h2 class="subtitle is-size-3 has-text-centered has-text-white">NEWS ARTICLES</h2>
-
-        <!--News Article Containers Begin Here-->
-        <section class="container">
-          <div class="columns features" id="news-columns">
-            <div class="column is-4">
-              <div class="card is-shady">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://www.quoteinspector.com/media/bitcoin/crypto-ticker-candle-background-md.jpg"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content cardHeight">
-                  <div class="content">
-                    <h4></h4>
-                    <p></p>
-                    <a href="http://www.google.com" target="_blank" class="button is-link">Read</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-4">
-              <div class="card is-shady">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://www.quoteinspector.com/media/bitcoin/crypto-ticker-candle-background-md.jpg"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content cardHeight">
-                  <div class="content">
-                    <h4></h4>
-                    <p></p>
-                    <a href="http://www.google.com" target="_blank" class="button is-link">Read</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="column is-4">
-              <div class="card is-shady">
-                <div class="card-image">
-                  <figure class="image is-4by3">
-                    <img src="https://www.quoteinspector.com/media/bitcoin/crypto-ticker-candle-background-md.jpg"
-                      alt="Placeholder image">
-                  </figure>
-                </div>
-                <div class="card-content cardHeight">
-                  <div class="content">
-                    <h4></h4>
-                    <p></p>
-                    <a href="http://www.google.com" target="_blank" class="button is-link">Read</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <form>
+          <div>
+            <label for="user-id">User ID:</label>
+            <input type="text" id="user-id" />
           </div>
-        </section>
-        <!--News Article Containers End Here-->
-
+          <div>
+            <label for="user-pass">password:</label>
+            <input type="password" id="user-pass" />
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+        
+        <form>
+          <div>
+            <label for="register-id">Username:</label>
+            <input type="text" id="register-id" />
+          </div>
+          <div>
+            <label for="email-signup">email:</label>
+            <input type="text" id="email-signup" />
+          </div>
+          <div>
+            <label for="password-signup">password:</label>
+            <input type="password" id="password-signup" />
+          </div>
+          <div>
+            <button type="submit">signup</button>
+          </div>
+        </form>
+        
+        <script src="/javascript/login.js"></script>
       </section>
     </div>
   </div>

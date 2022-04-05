@@ -3,15 +3,24 @@ const { Wallet, Coin, User } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
+    res.render("login");
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/wallet/", async (req, res) => {
+  try {
     const walletData = await Wallet.findAll({
-      attributes: ['id', 'name'],
+      attributes: ["id", "name"],
       include: [
         {
           model: User,
-          attributes: ['username']
-        }
-      ]
-    })
+          attributes: ["username"],
+        },
+      ],
+    });
 
     const wallets = walletData.map((wallet) => wallet.get({ plain: true }));
     console.log(wallets);
