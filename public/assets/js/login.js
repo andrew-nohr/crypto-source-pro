@@ -20,7 +20,7 @@ async function loginFormHandler(event) {
         document.location.replace('/');
         console.log("logged in");
       } else {
-        alert(response.statusText);
+        console.log(response.statusText);
       }
     }
   }
@@ -45,7 +45,7 @@ async function loginFormHandler(event) {
         document.location.replace('/');
         console.log('signed up')
       } else {
-        alert(response.statusText);
+        console.log(response.statusText);
       }
     }
   }
