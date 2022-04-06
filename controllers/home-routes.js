@@ -3,11 +3,11 @@ const { Wallet, Coin, User } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
+    res.render("login");
     if (req.session.loggedIn) {
-      console.log("user is logged in")
       res.render("wallet");
     } else {
-      res.render("login");
+
     }
     console.log(req.session);
   } catch (err) {
