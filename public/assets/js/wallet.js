@@ -65,27 +65,6 @@ const getAcronymFromMenuText = function (menuText) {
   return coinAcronym
 }
 
-async function getCoinLayerDataBySymbol(symbol) {
-  const coinLayerURL =
-    "http://api.coinlayer.com/api/live?access_key=" +
-    coinLayerApiKey +
-    "&Symbols=" +
-    symbol;
-
-  console.log("Fetching: " + coinLayerURL)
-  let response = await fetch(coinLayerURL)
-  // Check if response is OK and if it is, load response as json
-  if (response.ok) {
-    let coinLayerData = await response.json()
-    // check if we recieved data back and if we did, return
-    if (coinLayerData != "" && coinLayerData != null) {
-      return coinLayerData
-    } else {
-      return Promise.reject("API did not return an OK response.")
-    }
-  }
-}
-
 async function addToWallet() {
   console.log("Add button clicked")
 
