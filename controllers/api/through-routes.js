@@ -36,7 +36,7 @@ router.get('/:id', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    Coins_Wallet.create({
+    Coins_Wallet.upsert({
         WalletId: req.body.WalletId,
         CoinId: req.body.CoinId,
         count: req.body.count

@@ -39,6 +39,21 @@ async function getWalletId() {
   return wallet.id;
 }
 
+async function getCurrentCoinCountbyAcronym(acronym) {
+  //get all wallet data for current user
+  const response = await fetch(`/api/wallet/currentUser`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const wallet = await response.json();
+  let coins = wallet.owned_coins;
+  let matchingCoin = coins.find(coin => { return coin.acronym === acronym })
+  //return only the count
+  return matchingCoin.coins_wallet.count
+}
+
 const getAcronymFromMenuText = function(menuText) {
   //gets the string within a parenthesis 
   let first_index = menuText.indexOf("(");
@@ -52,13 +67,20 @@ async function addToWallet() {
 
   //get selected values from page
   const coinAcronym = getAcronymFromMenuText(menuText.textContent)
-  const count = parseInt(document.querySelector('.amount-input').value)
+  let count = parseInt(document.querySelector('.amount-input').value)
 
   //get the id for the coin
   let CoinId = await getCoinIdByAcronym(coinAcronym)
 
   //get walletId of logged in user
-  let WalletId = await getWalletId(); 
+  let WalletId = await getWalletId()
+
+  //get current number of same coin in user's wallet
+  let currentCount = parseInt(await getCurrentCoinCountbyAcronym(coinAcronym))
+  console.log("current count of coins: " + currentCount)
+
+  //add new coins to current count of coins
+  count = count + currentCount
 
   console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
 
@@ -76,7 +98,8 @@ async function addToWallet() {
   });
 
   if (response.ok) {
-    console.log("Added to wallet")
+    //refresh the page
+    document.location.replace('/wallet');
   } else {
     console.log("Error adding to wallet: " + response.statusText);
   }
@@ -85,6 +108,37 @@ async function addToWallet() {
 async function removeFromWallet() {
   console.log("remove button clicked")
 
+   //get selected values from page
+   const coinAcronym = getAcronymFromMenuText(menuText.textContent)
+   const count = parseInt(document.querySelector('.amount-input').value)
+ 
+   //get the id for the coin
+   let CoinId = await getCoinIdByAcronym(coinAcronym)
+ 
+   //get walletId of logged in user
+   let WalletId = await getWalletId(); 
+ 
+   console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
+ 
+   //remove coins from wallet
+   const response = await fetch(`/api/through`, {
+     method: 'POST',
+     body: JSON.stringify({
+       WalletId,
+       CoinId,
+       count
+     }),
+     headers: {
+       'Content-Type': 'application/json'
+     }
+   });
+ 
+   if (response.ok) {
+     //refresh the page
+     document.location.replace('/wallet');
+   } else {
+     console.log("Error adding to wallet: " + response.statusText);
+   }
 }
 
 dropdown.addEventListener("click", toggleDropdown);
