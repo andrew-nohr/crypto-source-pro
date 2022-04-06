@@ -1,15 +1,17 @@
 body {
   background-image: url(../images/cypto2.jpg);
-  background-repeat: no-repeat;
+  background-color: rgba(0,0,0, 0.0);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  height: 100vh;
 }
 
 header {
   background-color: black;
   opacity: 100%;
 }
+
 
 .article-container {
   height: 500px;
@@ -27,6 +29,10 @@ header {
 
 .cardHeight {
   max-height: 50vh;
+}
+
+.content {
+  margin: 5%;
 }
 
 .hero-body {
