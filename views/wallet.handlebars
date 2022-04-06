@@ -7,108 +7,107 @@
 </section>
 
 
-
-
-
 <section class="content">
-  <div class="columns">  
+  <div class="columns">
     <!-- Add Asset Side Section -->
     <div class="column is-one-fifth">
-        <p>Manage Holdings</p>
-          <div class="dropdown m-4">
-            <div class="dropdown-trigger">
-              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-                <span id="menuText">Choose Asset</span>
-                <span class="icon is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </button>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu2" role="menu">
-              <div class="dropdown-content">
-                <hr class="dropdown-divider">
-                <a href="#btc" class="dropdown-item" id="BTC" onclick="BTC()">
-                  Bitcoin (BTC)
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#eth" class="dropdown-item" id="ETH" onclick="ETH()">
-                  Ethereum (ETH)
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#ltc" class="dropdown-item" id="LTC" onclick="LTC()">
-                  LiteCoin (LTC)
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#xrp" class="dropdown-item" id ="XRP" onclick="XRP()">
-                  Ripple (XRP)
-                </a>
-                <hr class="dropdown-divider">                            
-                <a href="#ada" class="dropdown-item" id ="ADA" onclick="ADA()">
-                    Cardano (ADA)
-                </a>
-                <hr class="dropdown-divider">                            
-                <a href="#cro" class="dropdown-item" id="CRO" onclick="CRO()">
-                    Crypto.com Coin (CRO)
-                </a>                            
-              </div>
-            </div>
+      <p>Manage Holdings</p>
+      <div class="dropdown m-4">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
+            <span id="menuText">Choose Asset</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu2" role="menu">
+          <div class="dropdown-content">
+            <hr class="dropdown-divider">
+            <a href="#btc" class="dropdown-item" id="BTC" onclick="BTC()">
+              Bitcoin (BTC)
+            </a>
+            <hr class="dropdown-divider">
+            <a href="#eth" class="dropdown-item" id="ETH" onclick="ETH()">
+              Ethereum (ETH)
+            </a>
+            <hr class="dropdown-divider">
+            <a href="#ltc" class="dropdown-item" id="LTC" onclick="LTC()">
+              LiteCoin (LTC)
+            </a>
+            <hr class="dropdown-divider">
+            <a href="#xrp" class="dropdown-item" id="XRP" onclick="XRP()">
+              Ripple (XRP)
+            </a>
+            <hr class="dropdown-divider">
+            <a href="#ada" class="dropdown-item" id="ADA" onclick="ADA()">
+              Cardano (ADA)
+            </a>
+            <hr class="dropdown-divider">
+            <a href="#cro" class="dropdown-item" id="CRO" onclick="CRO()">
+              Crypto.com Coin (CRO)
+            </a>
           </div>
-            <div class="field m-4">
-              <label class="label">Holdings Amount</label>
-              <div class="control m-4">
-                <input class="input" type="text" placeholder="Amount">
-              </div>
-            </div>
-            <div class="control m-4">
-              <button class="button is-primary">Add</button>
-            </div>
-            <div class="control m-4">
-              <button class="button is-primary">Remove</button>
-            </div>
+        </div>
+      </div>
+      <div class="field m-4">
+        <label class="label">Holdings Amount</label>
+        <div class="control m-4">
+          <input class="input amount-input" type="text" placeholder="Amount">
+        </div>
+      </div>
+      <div class="control m-4">
+        <button class="button is-primary add-btn">Add</button>
+      </div>
+      <div class="control m-4">
+        <button class="button is-primary remove-btn">Remove</button>
+      </div>
     </div>
     <!-- Add Asset Side Section End-->
 
 
-
     <!-- Wallet Section -->
-      <div class="column">
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-                <thead>
-                  <tr>
-                    <th>Abbr</th>
-                    <th>Asset</th>
-                    <th>Current Value</th>
-                    <th>Holdings</th>
-                    <th>Holdings Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {{#each wallet.coins as |coin|}}
-                  <tr>
-                    <td>{{acronym}}</td>
-                    <td>{{name}}</td>
-                    <td>"$Value Here"</td>
-                    <td>{{count}}</td>
-                    <td>"Coin Value x count"</td>
-                  </tr>
-                  {{/each}}
-                  <tr>
-                    <td>ETH</td>
-                    <td>Etherium</td>
-                    <td>$6,000</td>
-                    <td>3</td>
-                    <td>$18,000</td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <th>"Wallet Value"</th>
-                    <td>"Total $ Value"</td>
-                  </tr>
-                </tbody>
-        </table>
-      </div>
+    <div class="column">
+      <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <thead>
+          <tr>
+            <th>Abbr</th>
+            <th>Asset</th>
+            <th>Current Value</th>
+            <th>Holdings</th>
+            <th>Holdings Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each wallet.coins as |coin|}}
+          <tr>
+            <td>{{acronym}}</td>
+            <td>{{name}}</td>
+            <td>"$Value Here"</td>
+            <td>{{count}}</td>
+            <td>"Coin Value x count"</td>
+          </tr>
+          {{/each}}
+          <tr>
+            <td>ETH</td>
+            <td>Etherium</td>
+            <td>$6,000</td>
+            <td>3</td>
+            <td>$18,000</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th>"Wallet Value"</th>
+            <td>"Total $ Value"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <!-- Wallet Section End -->
   </div>
 </section>
+
+
+<script src="/assets/js/wallet.js"></script>
