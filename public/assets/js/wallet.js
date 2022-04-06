@@ -27,11 +27,7 @@ async function getCoinIdByAcronym(acronym) {
 }
 
 async function getWalletId() {
-  
-  //TODO get user id from session
-  //console.log("logged in user id is: " + req.session.userId)
-  
-  //get all wallet data
+  //get all wallet data for current user
   const response = await fetch(`/api/wallet/currentUser`, {
     method: 'GET',
     headers: {
@@ -66,7 +62,7 @@ async function addToWallet() {
 
   console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
 
-  //add coins to wallet using API
+  //add coins to wallet
   const response = await fetch(`/api/through`, {
     method: 'POST',
     body: JSON.stringify({
