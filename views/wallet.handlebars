@@ -74,9 +74,9 @@
           <tr>
             <td>{{coin.acronym}}</td>
             <td>{{coin.name}}</td>
-            <td>ValueTBD</td>
-            <td>{{coin.coins_wallet.count}}</td>
-            <td>HoldingsValueTBD</td>
+            <td class="fetch-value-{{coin.acronym}}">Loading...</td>
+            <td class="count-value-{{coin.acronym}}">{{coin.coins_wallet.count}}</td>
+            <td class="calc-value-{{coin.acronym}}">Loading...</td>
           </tr>
           {{/each}}
         </tbody>
