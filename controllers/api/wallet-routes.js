@@ -24,6 +24,42 @@ router.get('/', (req, res) => {
     });
 });
 
+// route: /api/wallet/currentUser
+router.get('/currentUser', (req, res) => {
+    Wallet.findOne({
+        where: {
+            id: req.session.userid
+        },
+        attributes: [
+            'id',
+            'name',
+            'user_id'
+        ],
+        include: [
+            {
+                model: Coin,
+                as: "owned_coins",
+                attributes: ['id', 'acronym', 'name'],
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
+        ]
+    })
+    .then(dbWalletData => {
+        if (!dbWalletData) {
+          res.status(404).json({ message: 'No wallet found for logged in user'});
+          return;
+        }
+        res.json(dbWalletData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+});
+
 // route: /api/wallet/:id
 router.get('/:id', (req, res) => {
     Wallet.findOne({
@@ -59,6 +95,8 @@ router.get('/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
+
+
 
 // route: /api/wallet/
 router.post('/', (req, res) => {

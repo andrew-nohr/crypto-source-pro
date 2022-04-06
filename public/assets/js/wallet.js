@@ -1,19 +1,9 @@
-<<<<<<< HEAD
 // var strs = ["String 1", "String 2", "String 3"];
 // var list = document.createElement("ul");
 // for (var i in strs) {
 //   var anchor = document.createElement("a");
 //   anchor.href = "#";
 //   anchor.innerText = strs[i];
-=======
-var strs = ["String 1", "String 2", "String 3"];
-var list = document.createElement("ul");
-
-for (var i in strs) {
-  var anchor = document.createElement("a");
-  anchor.href = "#";
-  anchor.innerText = strs[i];
->>>>>>> d89ff36a84c99fde9cf0d57be4badc2b90c28a79
 
 //   var elem = document.createElement("li");
 //   elem.appendChild(anchor);
@@ -23,60 +13,89 @@ for (var i in strs) {
 var dropdown = document.querySelector(".dropdown");
 var menuText = document.querySelector("#menuText");
 
-var toggleDropdown = function (event) {
+const toggleDropdown = function (event) {
   event.stopPropagation();
   dropdown.classList.toggle("is-active");
 
   if (event.target.className == "dropdown-item") {
-    var selectedCoin = event.target.textContent.trim(); //added trim to remove white space
+    var selectedCoin = event.target.textContent.trim();
     menuText.textContent = selectedCoin; //changes text in menuText class
   }
 };
 
-async function addToWallet() {
-  console.log("add button clicked")
-
-  const coin = menuText.textContent;
-  const count = document.querySelector('.amount-input').value;
-
-  console.log("Got asset type to add : " + coin + " with a count of: " + count)
-
+async function getCoinIdByAcronym(acronym) {
   //get all coins data
-  const coinsResponse = await fetch(`/api/coins`, {
+  const response = await fetch(`/api/coins`, {
     method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const coins = await response.json();
+  //find the coin object with a matching id
+  let matchingCoin = coins.find(coin => { return coin.acronym === acronym })
+  //return only the id
+  return matchingCoin.id;
+}
+
+async function getWalletId() {
+  
+  //TODO get user id from session
+  //console.log("logged in user id is: " + req.session.userId)
+  
+  //get all wallet data
+  const response = await fetch(`/api/wallet/currentUser`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  const wallet = await response.json();
+  //return only the id
+  return wallet.id;
+}
+
+const getAcronymFromMenuText = function(menuText) {
+  //gets the string within a parenthesis 
+  let first_index = menuText.indexOf("(");
+  let second_index = menuText.indexOf(")");
+  let coinAcronym = menuText.substring(first_index + 1, second_index);
+  return coinAcronym;
+}
+
+async function addToWallet() {
+  console.log("Add button clicked")
+
+  //get selected values from page
+  const coinAcronym = getAcronymFromMenuText(menuText.textContent)
+  const count = parseInt(document.querySelector('.amount-input').value)
+
+  //get the id for the coin
+  let CoinId = await getCoinIdByAcronym(coinAcronym)
+
+  //get walletId of logged in user
+  let WalletId = await getWalletId(); 
+
+  console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
+
+  //add coins to wallet using API
+  const response = await fetch(`/api/through`, {
+    method: 'POST',
+    body: JSON.stringify({
+      WalletId,
+      CoinId,
+      count
+    }),
     headers: {
       'Content-Type': 'application/json'
     }
   });
 
-  if (coinsResponse.ok) {
-    let coinsArray = coinsResponse.json()
-    console.log(coinsArray)
-    //selectedCoinObject = coinsArray.find(object => object.acronym === 'BTC')
-    //console.log("selected coin object: " + selectedCoinObject)
+  if (response.ok) {
+    console.log("Added to wallet")
   } else {
-    alert(response.statusText);
+    console.log("Error adding to wallet: " + response.statusText);
   }
-
-
-  // //add coins to wallet using API
-  // const response = await fetch(`/api/through`, {
-  //   method: 'POST',
-  //   body: JSON.stringify({
-  //     WalletId,
-  //     CoinId,
-  //     count
-  //   }),
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   }
-  // });
-
-  // if (response.ok) {
-  //   console.log("added to wallet")
-  // } else {
-  //   alert(response.statusText);
-  // }
 }
 
 async function removeFromWallet() {
