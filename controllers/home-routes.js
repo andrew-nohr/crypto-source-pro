@@ -4,6 +4,13 @@ const { Wallet, Coin, User } = require("../models");
 router.get("/", async (req, res) => {
   try {
     res.render("login");
+    if(req.session.loggedIn)
+    {
+      res.render("wallet");
+    }
+    res.render("login");
+
+    console.log(req.session);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

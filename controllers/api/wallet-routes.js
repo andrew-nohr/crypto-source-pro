@@ -4,8 +4,13 @@ const { Wallet, User, Coin } = require('../../models');
 // route: /api/wallet
 router.get('/', (req, res) => {
     Wallet.findAll({
-        attributes: ['id', 'name'],
+        attributes: ['id', 'name', 'user_id'],
         include: [
+            {
+                model: Coin,
+                as: "owned_coins",
+                attributes: ['id', 'acronym', 'name'],
+            },
             {
                 model: User,
                 attributes: ['username']
@@ -27,7 +32,8 @@ router.get('/:id', (req, res) => {
         },
         attributes: [
             'id',
-            'name'
+            'name',
+            'user_id'
         ],
         include: [
             {

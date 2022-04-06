@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 // var strs = ["String 1", "String 2", "String 3"];
 // var list = document.createElement("ul");
 // for (var i in strs) {
 //   var anchor = document.createElement("a");
 //   anchor.href = "#";
 //   anchor.innerText = strs[i];
+=======
+var strs = ["String 1", "String 2", "String 3"];
+var list = document.createElement("ul");
+
+for (var i in strs) {
+  var anchor = document.createElement("a");
+  anchor.href = "#";
+  anchor.innerText = strs[i];
+>>>>>>> d89ff36a84c99fde9cf0d57be4badc2b90c28a79
 
 //   var elem = document.createElement("li");
 //   elem.appendChild(anchor);
