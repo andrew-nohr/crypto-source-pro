@@ -96,8 +96,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-
-
 // route: /api/wallet/
 router.post('/', (req, res) => {
     // expects {name: 'My Wallet', user_id: 1}
