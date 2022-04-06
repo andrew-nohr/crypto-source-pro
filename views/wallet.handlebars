@@ -1,12 +1,3 @@
-<section>
-  <section>
-    {{#each wallet.coins as |coin|}}
-    {{> coin-details}}
-    {{/each}}
-  </section>
-</section>
-
-
 <section class="content">
   <div class="columns">
     <!-- Add Asset Side Section -->
@@ -79,35 +70,20 @@
           </tr>
         </thead>
         <tbody>
-          {{#each wallet.coins as |coin|}}
+          {{#each walletData.owned_coins as |coin|}}
           <tr>
-            <td>{{acronym}}</td>
-            <td>{{name}}</td>
-            <td>"$Value Here"</td>
-            <td>{{count}}</td>
-            <td>"Coin Value x count"</td>
+            <td>{{coin.acronym}}</td>
+            <td>{{coin.name}}</td>
+            <td>ValueTBD</td>
+            <td>{{coin.coins_wallet.count}}</td>
+            <td>HoldingsValueTBD</td>
           </tr>
           {{/each}}
-          {{!-- <tr>
-            <td>ETH</td>
-            <td>Etherium</td>
-            <td>$6,000</td>
-            <td>3</td>
-            <td>$18,000</td>
-          </tr> --}}
-          {{!-- <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <th>"Wallet Value"</th>
-            <td>"Total $ Value"</td>
-          </tr> --}}
         </tbody>
       </table>
     </div>
     <!-- Wallet Section End -->
   </div>
 </section>
-
 
 <script src="/assets/js/wallet.js"></script>
