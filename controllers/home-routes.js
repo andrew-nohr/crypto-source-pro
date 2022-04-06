@@ -3,13 +3,12 @@ const { Wallet, Coin, User } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    res.render("login");
-    if(req.session.loggedIn)
-    {
+    if (req.session.loggedIn) {
+      console.log("user is logged in")
       res.render("wallet");
+    } else {
+      res.render("login");
     }
-    res.render("login");
-
     console.log(req.session);
   } catch (err) {
     console.log(err);
@@ -18,6 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/wallet/", async (req, res) => {
+  console.log("Logged in user id is: " + JSON.stringify(req.session))
   try {
     const walletData = await Wallet.findAll({
       attributes: ["id", "name"],
