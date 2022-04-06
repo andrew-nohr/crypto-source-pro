@@ -4,12 +4,11 @@ const { Wallet, Coin, User } = require("../models");
 router.get("/", async (req, res) => {
   try {
     res.render("login");
-    if(req.session.loggedIn)
-    {
+    if (req.session.loggedIn) {
       res.render("wallet");
-    }
-    res.render("login");
+    } else {
 
+    }
     console.log(req.session);
   } catch (err) {
     console.log(err);
@@ -18,26 +17,44 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/wallet/", async (req, res) => {
-  try {
-    const walletData = await Wallet.findAll({
-      attributes: ["id", "name"],
-      include: [
-        {
-          model: User,
-          attributes: ["username"],
-        },
-      ],
-    });
+  console.log("Logged in user id is: " + JSON.stringify(req.session))
 
-    const wallets = walletData.map((wallet) => wallet.get({ plain: true }));
-    console.log(wallets);
-    res.render("wallet", {
-      wallets,
+  Wallet.findOne({
+    where: {
+      user_id: parseInt(req.session.user_id)
+    },
+    attributes: [
+      'id',
+      'name',
+      'user_id'
+    ],
+    include: [
+      {
+        model: Coin,
+        as: "owned_coins",
+        attributes: ['id', 'acronym', 'name'],
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+  })
+    .then(dbWalletData => {
+      if (!dbWalletData) {
+        console.log("No wallet with this id: " + req.session.user_id)
+        return;
+      }
+      console.log("Wallet Data " + JSON.stringify(dbWalletData));
+      const walletData = dbWalletData.get({ plain: true });
+      res.render("wallet", {
+        walletData,
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json(err);
     });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
 });
 
 router.get("/wallet/:id", async (req, res) => {
