@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/wallet/", async (req, res) => {
+
   console.log("Logged in user id is: " + JSON.stringify(req.session))
 
   Wallet.findOne({
