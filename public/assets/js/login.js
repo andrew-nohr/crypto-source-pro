@@ -42,8 +42,6 @@ async function loginFormHandler(event) {
       });
   
       if (createUserResponse.ok) {
-        //document.location.replace('/');
-        console.log('signed up')
         const createdUser = await createUserResponse.json();
         
         const createWalletResponse = await fetch('/api/wallet', {
