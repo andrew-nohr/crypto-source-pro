@@ -11,65 +11,17 @@
 </head>
 
 <body>
-
-<!-- Header and Navigation Bar Start -->
-<header>
+  <header>
     <h1 class="title is-uppercase is-size-1 has-text-centered has-text-white">Crypto Source Pro</h1>
     <h2 class="subtitle is-size-3 has-text-centered has-text-white">Your source for current crypto currency rates and
       patterns.</h2>
   </header>
 
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://goingblindbro.github.io/crypto-source-pro/">
-        <img src="/assets/images/cspro.png" width="40" height="40">
-      </a>
-
-    </div>
-  
-    <div id="navbar" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item">
-          Home
-        </a>
-
-        </div>
-      </div>
-  
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <!-- If user is logged in then display logout -->
-            {{#if loggedIn}}
-            <a class="button is-black"n href="login.html">
-              Logout
-            </a>
-            {{else}}
-            <!-- If user is logged out then display login -->
-            <a class="button is-black"n href="login.html">
-              Login
-            </a>
-            {{/if}}
-            <a class="button is-black"n href="signup.html">
-              Sign Up
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-<!-- Header and Navigation Bar End -->
-<main>
-  {{{body}}}
-</main>
-
-
+  <main>
+    {{{body}}}
+  </main>
 
   <script src="https://rawgit.com/moment/moment/2.2.1/min/moment.min.js"></script>
-  <!--<script src="/assets/js/script2.js"></script>-->
-  <!--<script src="/assets/js/wallet.js"></script>-->
-  <!--<script src="/assets/js/login.js"></script>-->
-
 </body>
 
 </html>

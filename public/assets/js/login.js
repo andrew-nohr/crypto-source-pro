@@ -32,7 +32,7 @@ async function loginFormHandler(event) {
     const password = document.querySelector('#password-signup').value.trim();
   
     if (username && password) {
-      const response = await fetch('/api/user', {
+      const createUserResponse = await fetch('/api/user', {
         method: 'post',
         body: JSON.stringify({
           username,
@@ -41,11 +41,36 @@ async function loginFormHandler(event) {
         headers: { 'Content-Type': 'application/json' }
       });
   
-      if (response.ok) {
-        document.location.replace('/');
-        console.log('signed up')
+      if (createUserResponse.ok) {
+        const createdUser = await createUserResponse.json();
+        
+        const createWalletResponse = await fetch('/api/wallet', {
+          method: 'post',
+          body: JSON.stringify({
+            name: "User Wallet",
+            user_id: createdUser.id
+          }),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        let signupElement = document.querySelector('.signup-form')
+        let successBanner = document.createElement('div')
+        successBanner.classList.add('notification')
+        successBanner.classList.add('is-success')
+        successBanner.classList.add('is-light')
+        successBanner.classList.add('mt-4')
+        successBanner.textContent = "Signup successful! Please login."
+        signupElement.appendChild(successBanner)
       } else {
         console.log(response.statusText);
+        let signupElement = document.querySelector('.signup-form')
+        let successBanner = document.createElement('div')
+        successBanner.classList.add('notification')
+        successBanner.classList.add('is-danger')
+        successBanner.classList.add('is-light')
+        successBanner.classList.add('mt-4')
+        successBanner.textContent = "Error signing up: " + response.statusText
+        signupElement.appendChild(successBanner)
       }
     }
   }
