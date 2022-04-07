@@ -40,7 +40,7 @@ async function loginFormHandler(event) {
         }),
         headers: { 'Content-Type': 'application/json' }
       });
-  
+      
       if (createUserResponse.ok) {
         const createdUser = await createUserResponse.json();
         
@@ -62,14 +62,16 @@ async function loginFormHandler(event) {
         successBanner.textContent = "Signup successful! Please login."
         signupElement.appendChild(successBanner)
       } else {
-        console.log(response.statusText);
+        console.log(createUserResponse.statusText);
+        const createdUserError = await createUserResponse.json();
+        console.log(createdUserError)
         let signupElement = document.querySelector('.signup-form')
         let successBanner = document.createElement('div')
         successBanner.classList.add('notification')
         successBanner.classList.add('is-danger')
         successBanner.classList.add('is-light')
         successBanner.classList.add('mt-4')
-        successBanner.textContent = "Error signing up: " + response.statusText
+        successBanner.textContent = "Error signing up: " + createdUserError.errors[0].message
         signupElement.appendChild(successBanner)
       }
     }
