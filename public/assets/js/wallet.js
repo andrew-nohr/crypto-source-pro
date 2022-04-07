@@ -1,8 +1,8 @@
 let dropdown = document.querySelector(".dropdown")
 let menuText = document.querySelector("#menuText")
 let walletTable = document.querySelector(".table")
-let coinLayerApiKey = "adf0c97a6bc7712feea1fc05da4edb58"
-let coinLayerBaseURL = "http://api.coinlayer.com/api/live?access_key=" + coinLayerApiKey
+let coinLayerApiKey = "4c2e83f1eb6bde0ff579c2e30e35b991"
+let coinLayerURL = "http://api.coinlayer.com/api/live?access_key=" + coinLayerApiKey
 
 const toggleDropdown = function (event) {
   event.stopPropagation();
@@ -128,26 +128,31 @@ async function removeFromWallet() {
   //subtract coins from current count of coins
   count = currentCount - count
 
-  console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
+  if (count > 0) {
+    console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
 
-  //add coins to wallet
-  const response = await fetch(`/api/through`, {
-    method: 'POST',
-    body: JSON.stringify({
-      WalletId,
-      CoinId,
-      count
-    }),
-    headers: {
-      'Content-Type': 'application/json'
+    //add coins to wallet
+    const response = await fetch(`/api/through`, {
+      method: 'POST',
+      body: JSON.stringify({
+        WalletId,
+        CoinId,
+        count
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      //refresh the page
+      document.location.replace('/wallet');
+    } else {
+      console.log("Error adding to wallet: " + response.statusText);
     }
-  });
-
-  if (response.ok) {
-    //refresh the page
-    document.location.replace('/wallet');
-  } else {
-    console.log("Error adding to wallet: " + response.statusText);
+  }
+  else {
+    console.log("Removing more coins than are in wallet")
   }
 }
 
@@ -156,39 +161,33 @@ async function getAllWalletValues() {
   let formatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
   //get all the elements that contain values we need to fetch
-  let fetchValues = walletTable.querySelectorAll('[class^="fetch-value-"]')
+  let currentValueElements = walletTable.querySelectorAll('[class^="fetch-value-"]')
 
-  fetchValues.forEach(async element => {
+  //fetch all crypto values in a single API call
+  console.log("fetching " + coinLayerURL)
+  let response = await fetch(coinLayerURL)
+  let coinLayerData = await response.json()
+
+  currentValueElements.forEach(async currentValueElement => {
     //trim the value from the element class name
     //assumes the class name starts with "fetch-value-"
-    let symbol = element.className.substring(12)
-
-    //fetch the value
-    const coinLayerURL = coinLayerBaseURL + "&Symbols=" + symbol;
-    console.log("fetching " + coinLayerURL)
-    let response = await fetch(coinLayerURL)
-    // Check if response is OK and if it is, load response as json
-    if (response.ok) {
-      let coinLayerData = await response.json()
-      // check if we recieved data back and update the page
-      let currentCalcValueElement = walletTable.querySelector('.calc-value-' + symbol)
-      if (coinLayerData != "" && coinLayerData != null && coinLayerData.success === 'true') {
-        let currentCoinValue = parseFloat(Object.values(coinLayerData.rates))
-        let currentCoinCount = parseFloat(walletTable.querySelector('.count-value-' + symbol).textContent)
-        let currentCalcValue = walletTable.querySelector('.calc-value-' + symbol)
-
-        //update current value and calc value on page
-        element.textContent = formatter.format(currentCoinValue)
-        currentCalcValueElement.textContent = formatter.format(currentCoinValue * currentCoinCount)
-      } else {
-        element.textContent = "Error getting current rate"
-        currentCalcValueElement.textContent = "Error getting holdings value"
-      }
+    let symbol = currentValueElement.className.substring(12)
+    let currentCalcValueElement = walletTable.querySelector('.calc-value-' + symbol)
+    // check if we recieved data back and update the page
+    if (coinLayerData != "" && coinLayerData != null && coinLayerData.success === true) {
+      let currentCoinValue = parseFloat(coinLayerData.rates[symbol])
+      let currentCoinCount = parseFloat(walletTable.querySelector('.count-value-' + symbol).textContent)
+      //update current value and calc value on page
+      currentValueElement.textContent = formatter.format(currentCoinValue)
+      currentCalcValueElement.textContent = formatter.format(currentCoinValue * currentCoinCount)
+    } else {
+      currentValueElement.textContent = "Error getting current rate"
+      currentCalcValueElement.textContent = "Error getting holdings value"
     }
   })
 }
 
-window.addEventListener('load', getAllWalletValues)
+//window.addEventListener('load', getAllWalletValues)
 dropdown.addEventListener("click", toggleDropdown);
 document.querySelector('.add-btn').addEventListener('click', addToWallet);
 document.querySelector('.remove-btn').addEventListener('click', removeFromWallet);
