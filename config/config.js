@@ -17,10 +17,12 @@ module.exports = {
         "dialect": "mysql"
     },
     production: {
-        "username": process.env.DB_USER,
-        "password": process.env.DB_PW,
-        "database": process.env.DB_NAME,
-        "host": "127.0.0.1",
+        //JAWSDB is used with Heroku
+        "use_env_variable": "JAWSDB_URL",
+        //"username": process.env.DB_USER,
+        //"password": process.env.DB_PW,
+        //"database": process.env.DB_NAME,
+        //"host": "127.0.0.1",
         "dialect": "mysql"
     }
 }
