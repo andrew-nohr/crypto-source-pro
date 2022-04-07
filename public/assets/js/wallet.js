@@ -54,7 +54,11 @@ async function getCurrentCoinCountbyAcronym(acronym) {
   let coins = wallet.owned_coins;
   let matchingCoin = coins.find(coin => { return coin.acronym === acronym })
   //return only the count
-  return matchingCoin.coins_wallet.count
+  if (typeof matchingCoin === 'undefined') {
+    return 0
+  } else {
+    return matchingCoin.coins_wallet.count
+  }  
 }
 
 const getAcronymFromMenuText = function (menuText) {
@@ -187,7 +191,7 @@ async function getAllWalletValues() {
   })
 }
 
-window.addEventListener('load', getAllWalletValues)
+//window.addEventListener('load', getAllWalletValues)
 dropdown.addEventListener("click", toggleDropdown);
 document.querySelector('.add-btn').addEventListener('click', addToWallet);
 document.querySelector('.remove-btn').addEventListener('click', removeFromWallet);
