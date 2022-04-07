@@ -128,26 +128,31 @@ async function removeFromWallet() {
   //subtract coins from current count of coins
   count = currentCount - count
 
-  console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
+  if (count > 0) {
+    console.log("Inserting into wallet Id: " + WalletId + " a coin Id of: " + CoinId + " with a count of: " + count)
 
-  //add coins to wallet
-  const response = await fetch(`/api/through`, {
-    method: 'POST',
-    body: JSON.stringify({
-      WalletId,
-      CoinId,
-      count
-    }),
-    headers: {
-      'Content-Type': 'application/json'
+    //add coins to wallet
+    const response = await fetch(`/api/through`, {
+      method: 'POST',
+      body: JSON.stringify({
+        WalletId,
+        CoinId,
+        count
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.ok) {
+      //refresh the page
+      document.location.replace('/wallet');
+    } else {
+      console.log("Error adding to wallet: " + response.statusText);
     }
-  });
-
-  if (response.ok) {
-    //refresh the page
-    document.location.replace('/wallet');
-  } else {
-    console.log("Error adding to wallet: " + response.statusText);
+  }
+  else {
+    console.log("Removing more coins than are in wallet")
   }
 }
 
@@ -182,7 +187,7 @@ async function getAllWalletValues() {
   })
 }
 
-window.addEventListener('load', getAllWalletValues)
+//window.addEventListener('load', getAllWalletValues)
 dropdown.addEventListener("click", toggleDropdown);
 document.querySelector('.add-btn').addEventListener('click', addToWallet);
 document.querySelector('.remove-btn').addEventListener('click', removeFromWallet);

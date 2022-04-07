@@ -1,12 +1,13 @@
 <section class="content">
   <div class="columns">
     <!-- Add Asset Side Section -->
-    <div class="column is-one-fifth">
-      <p>Manage Holdings</p>
-      <div class="dropdown m-4">
+    <div class="column is-one-fifth box ">
+      <h2>Manage Holdings</h2>
+      <div class="dropdown mb-4">
         <div class="dropdown-trigger">
+          <label class="label">Select Asset</label>
           <button class="button" aria-haspopup="true" aria-controls="dropdown-menu2">
-            <span id="menuText">Choose Asset</span>
+            <span id="menuText">Asset</span>
             <span class="icon is-small">
               <i class="fas fa-angle-down" aria-hidden="true"></i>
             </span>
@@ -33,24 +34,22 @@
           </div>
         </div>
       </div>
-      <div class="field m-4">
+      <div class="field mb-4">
         <label class="label">Holdings Amount</label>
-        <div class="control m-4">
+        <div class="control mb-4">
           <input class="input amount-input" type="text" placeholder="Amount">
         </div>
       </div>
-      <div class="control m-4">
+      <div class="buttons">
         <button class="button is-primary add-btn">Add</button>
-      </div>
-      <div class="control m-4">
-        <button class="button is-primary remove-btn">Remove</button>
+        <button class="button is-danger remove-btn">Remove</button>
       </div>
     </div>
     <!-- Add Asset Side Section End-->
 
 
     <!-- Wallet Section -->
-    <div class="column">
+    <div class="column pt-0">
       <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
           <tr>

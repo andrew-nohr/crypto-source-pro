@@ -1,29 +1,35 @@
-<form class = "login-form">
-  <div>
-    <label for="user-id">Username:</label>
-    <input type="text" id="username" />
-  </div>
-  <div>
-    <label for="user-pass">password:</label>
-    <input type="password" id="user-pass" />
-  </div>
-  <div>
-    <button type="submit">login</button>
-  </div>
-</form>
+<div class="columns is-centered">
+  <div class="column is-one-quarter">
+    <form class="login-form box has-text-centered mt-5">
+      <h3 class="is-size-3 has-text-weight-bold">Existing Users Login</h3>
+      <div>
+        <label for="user-id">Username:</label>
+        <input class="input" type="text" id="username" />
+      </div>
+      <div>
+        <label for="user-pass">Password:</label>
+        <input class="input" type="password" id="user-pass" />
+      </div>
+      <div>
+        <button class="button is-primary mt-3 is-centered" type="submit">Login</button>
+      </div>
+    </form>
 
-<form class = "signup-form">
-  <div>
-    <label for="register-id">Username:</label>
-    <input type="text" id="register-id" />
+    <form class="signup-form has-text-centered box">
+      <h3 class="is-size-3 has-text-weight-bold">New User Signup</h3>
+      <div>
+        <label for="register-id">Username:</label>
+        <input class="input" type="text" id="register-id" />
+      </div>
+      <div>
+        <label for="password-signup">Password:</label>
+        <input class="input" type="password" id="password-signup" />
+      </div>
+      <div>
+        <button class="button is-primary mt-3 is-centered" type="submit">Sign-up</button>
+      </div>
+    </form>
   </div>
-  <div>
-    <label for="password-signup">password:</label>
-    <input type="password" id="password-signup" />
-  </div>
-  <div>
-    <button type="submit">signup</button>
-  </div>
-</form>
+</div>
 
 <script src="/assets/js/login.js"></script>
