@@ -191,7 +191,7 @@ async function getAllWalletValues() {
   })
 }
 
-//window.addEventListener('load', getAllWalletValues)
+window.addEventListener('load', getAllWalletValues)
 dropdown.addEventListener("click", toggleDropdown);
 document.querySelector('.add-btn').addEventListener('click', addToWallet);
 document.querySelector('.remove-btn').addEventListener('click', removeFromWallet);
