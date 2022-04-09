@@ -2,7 +2,7 @@ let dropdown = document.querySelector(".dropdown")
 let menuText = document.querySelector("#menuText")
 let walletTable = document.querySelector(".table")
 let coinLayerApiKey = "4c2e83f1eb6bde0ff579c2e30e35b991"
-let coinLayerURL = "http://api.coinlayer.com/api/live?access_key=" + coinLayerApiKey
+let coinLayerURL = "https://api.coinlayer.com/api/live?access_key=" + coinLayerApiKey
 
 const toggleDropdown = function (event) {
   event.stopPropagation();
