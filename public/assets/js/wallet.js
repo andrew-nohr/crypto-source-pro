@@ -25,6 +25,7 @@ async function getCoinIdByAcronym(acronym) {
   const coins = await response.json();
   //find the coin object with a matching id
   let matchingCoin = coins.find(coin => { return coin.acronym === acronym })
+  console.log(coins)
   //return only the id
   return matchingCoin.id;
 }
