@@ -18,7 +18,7 @@ To seed the coin table, first install the sequelize CLI by running the command '
 
 ## Link:
 
-https://goingblindbro.github.io/crypto-source-pro/
+https://andrew-nohr.github.io/crypto-source-pro/
 
 ## Screenshot
 
